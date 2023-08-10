@@ -1,6 +1,8 @@
 package com.oddfar.campus.business.task;
 
+import com.oddfar.campus.business.mapper.IShopMapper;
 import com.oddfar.campus.business.service.IMTService;
+import com.oddfar.campus.business.service.IShopService;
 import com.oddfar.campus.business.service.IUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +24,8 @@ public class CampusIMTTask {
     private IMTService imtService;
     @Autowired
     private IUserService iUserService;
+    @Autowired
+    private IShopService iShopService;
 
 
     /**
@@ -45,7 +49,7 @@ public class CampusIMTTask {
     }
 
     /**
-     * 9点期间，每分钟执行一次
+     * 9点期间，每分钟执行一次，预约茅台
      */
     @Async
     @Scheduled(cron = "0 0/1 9 ? * *")
@@ -55,6 +59,9 @@ public class CampusIMTTask {
     }
 
 
+    /**
+     * 7:10 7:55 8:10 8:55 刷新商品、版本号、门店数据
+     */
     @Async
     @Scheduled(cron = "0 10,55 7,8 ? * * ")
     public void refresh() {

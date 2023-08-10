@@ -34,13 +34,13 @@ export default {
     const ttt = this.Crypto.get(
           "Wuv7//QyvM5eAH6r6Yo3ng=="
         );
-    watermark.load({ watermark_txt: ttt });
+    //watermark.load({ watermark_txt: ttt });
   },
   watch: {
     $route(route) {
-        this.ttt = this.Crypto.get(
-          "JcPYFM5UAxqqLazbPKP8clN2geEWtOa/7P4nS4iJFvMeTCDKC0KgsFRoyO/kvjgmgzNB+L4ASDp26yz7hbhDxUpvtnLYSUgDUtII9L1Rxtk="
-        );
+        // this.ttt = this.Crypto.get(
+        //   "JcPYFM5UAxqqLazbPKP8clN2geEWtOa/7P4nS4iJFvMeTCDKC0KgsFRoyO/kvjgmgzNB+L4ASDp26yz7hbhDxUpvtnLYSUgDUtII9L1Rxtk="
+        // );
     },
   },
 };

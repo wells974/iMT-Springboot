@@ -35,7 +35,7 @@ export default {
   },
   data() {
     return {
-      title: 'campus',
+      title: 'iMT-吴彦祖专属',
       logo: logoImg
     }
   }

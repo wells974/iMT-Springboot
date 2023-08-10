@@ -43,7 +43,7 @@ public class IShopController {
      * 刷新i茅台商品列表
      */
     @GetMapping(value = "/refresh", name = "刷新i茅台商品列表")
-    @PreAuthorize("@ss.resourceAuth()")
+    //@PreAuthorize("@ss.resourceAuth()")
     public R refreshShop() {
         iShopService.refreshShop();
         return R.ok();

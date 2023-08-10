@@ -13,7 +13,10 @@ import cn.hutool.http.Method;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
+import com.oddfar.campus.business.entity.IItem;
+import com.oddfar.campus.business.entity.IShop;
 import com.oddfar.campus.business.entity.IUser;
+import com.oddfar.campus.business.mapper.IItemMapper;
 import com.oddfar.campus.business.mapper.IShopMapper;
 import com.oddfar.campus.business.mapper.IUserMapper;
 import com.oddfar.campus.business.service.IMTLogFactory;
@@ -50,6 +53,8 @@ public class IMTServiceImpl implements IMTService {
     private IShopMapper iShopMapper;
     @Autowired
     private IUserMapper iUserMapper;
+    @Autowired
+    IItemMapper iItemMapper;
 
     @Autowired
     private RedisCache redisCache;
@@ -188,9 +193,11 @@ public class IMTServiceImpl implements IMTService {
             try {
                 String shopId = iShopService.getShopId(iUser.getShopType(), itemId,
                         iUser.getProvinceName(), iUser.getCityName(), iUser.getLat(), iUser.getLng());
+                IShop iShop = iShopService.selectByIShopId(shopId);
+                IItem iItem = iItemMapper.selectById(itemId);
                 //预约
                 JSONObject json = reservation(iUser, itemId, shopId);
-                logContent += String.format("[预约项目]：%s\n[shopId]：%s\n[结果返回]：%s\n\n", itemId, shopId, json.toString());
+                logContent += String.format("[预约项目]：%s(%s)\n[shopId]：%s [店名]：%s\n[结果返回]：%s\n\n",iItem.getTitle(), itemId, shopId, iShop.getName(),json.toString());
             } catch (Exception e) {
                 logContent += String.format("执行报错--[预约项目]：%s\n[结果返回]：%s\n\n", itemId, e.getMessage());
             }
@@ -266,7 +273,7 @@ public class IMTServiceImpl implements IMTService {
             Double travelRewardXmy = getXmTravelReward(iUser);
             //本次旅行奖励领取后, 当月实际剩余旅行奖励
             if (travelRewardXmy > currentPeriodCanConvertXmyNum) {
-                String message = "当月无可领取奖励";
+                String message = "当月无可领取奖励,本月茅运已达上限！";
                 throw new ServiceException(message);
             }
         }
