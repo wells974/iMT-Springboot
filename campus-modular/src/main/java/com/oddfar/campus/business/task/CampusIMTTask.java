@@ -60,7 +60,7 @@ public class CampusIMTTask {
 
 
     /**
-     * 7:10 7:55 8:10 8:55 刷新商品、版本号、门店数据
+     *  8:10 8:55 刷新商品、版本号、门店数据
      */
     @Async
     @Scheduled(cron = "0 10,55 8 ? * * ")
