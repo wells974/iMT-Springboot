@@ -204,6 +204,8 @@ public class IMTServiceImpl implements IMTService {
             }
         }
         try {
+            //延迟5秒再领取耐力
+            TimeUnit.SECONDS.sleep(5);
             //预约后领取耐力值
             String energyAward = getEnergyAward(iUser);
             logContent += "[申购耐力值]:" + energyAward;
