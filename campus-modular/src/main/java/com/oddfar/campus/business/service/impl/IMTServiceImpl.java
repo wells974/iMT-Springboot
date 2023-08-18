@@ -50,8 +50,6 @@ public class IMTServiceImpl implements IMTService {
     private static final Logger logger = LoggerFactory.getLogger(IMTServiceImpl.class);
 
     @Autowired
-    private IShopMapper iShopMapper;
-    @Autowired
     private IUserMapper iUserMapper;
 
     @Autowired
