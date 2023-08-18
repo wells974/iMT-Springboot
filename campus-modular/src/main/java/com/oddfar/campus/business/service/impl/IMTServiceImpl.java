@@ -55,6 +55,8 @@ public class IMTServiceImpl implements IMTService {
     private IUserMapper iUserMapper;
 
     @Autowired
+    private IItemMapper iItemMapper;
+    @Autowired
     private RedisCache redisCache;
 
     @Autowired
