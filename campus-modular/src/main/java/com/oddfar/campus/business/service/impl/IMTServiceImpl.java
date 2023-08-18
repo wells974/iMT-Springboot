@@ -72,7 +72,7 @@ public class IMTServiceImpl implements IMTService {
     /**
      * 项目启动时，初始化数据
      */
-    @PostConstruct
+    //@PostConstruct
     public void init() {
         new Thread(new Runnable() {
             @Override
@@ -194,12 +194,13 @@ public class IMTServiceImpl implements IMTService {
                 String shopId = iShopService.getShopId(iUser.getShopType(), itemId,
                         iUser.getProvinceName(), iUser.getCityName(), iUser.getLat(), iUser.getLng());
                 IShop iShop = iShopService.selectByIShopId(shopId);
-                IItem iItem = iItemMapper.selectById(itemId);
+                IItem iItem = iItemMapper.selectOne("item_code",itemId);
                 //预约
                 JSONObject json = reservation(iUser, itemId, shopId);
                 logContent += String.format("[预约项目]：%s(%s)\n[shopId]：%s [店名]：%s\n[结果返回]：%s\n\n",iItem.getTitle(), itemId, shopId, iShop.getName(),json.toString());
             } catch (Exception e) {
                 logContent += String.format("执行报错--[预约项目]：%s\n[结果返回]：%s\n\n", itemId, e.getMessage());
+                e.printStackTrace();
             }
         }
 

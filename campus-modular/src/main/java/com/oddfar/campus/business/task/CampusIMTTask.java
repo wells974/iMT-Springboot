@@ -60,10 +60,10 @@ public class CampusIMTTask {
 
 
     /**
-     * 7:10 7:55 8:10 8:55 刷新商品、版本号、门店数据
+     *  8:10 8:55 刷新商品、版本号、门店数据
      */
     @Async
-    @Scheduled(cron = "0 10,55 7,8 ? * * ")
+    @Scheduled(cron = "0 10,55 8 ? * * ")
     public void refresh() {
         logger.info("「刷新数据」开始刷新版本号，预约item，门店shop列表  ");
         try {
